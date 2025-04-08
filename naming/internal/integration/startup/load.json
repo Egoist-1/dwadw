@@ -1,0 +1,29 @@
+{
+  "apps": {
+    "http": {
+      "servers": {
+        "myserver": {
+          "listen": [
+            ":443"
+          ],
+          "routes": [
+            {
+              "match": [
+                {
+                  "host": [
+                    "example.com"
+                  ]
+                }
+              ],
+              "handle": [
+                {
+                  "handler": "file_server"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

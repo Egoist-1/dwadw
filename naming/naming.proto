@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package greet;
+option go_package="./naming";
+
+// goctl rpc protoc naming.proto --go_out=./pb --go-grpc_out=./pb --zrpc_out=. --client=true -m
+service Naming{
+  rpc Load(LoadReq) returns (LoadRes);
+  rpc AddHost(AddHostReq) returns(AddHostRes);
+  rpc GetAllInfo(GetAllInfoReq) returns (GetAllInfoReqRes);
+  rpc UpdateHost(UpdateHostReq)returns(UpdateHostRes);
+//  rpc GetInfo
+}
+message UpdateHostReq{
+  string orgHost = 1;
+  string expHost = 2;
+}
+message UpdateHostRes{
+}
+
+message GetAllInfoReq{
+}
+message GetAllInfoReqRes{
+  string info = 1;
+}
+
+message AddHostReq{
+  repeated string host = 1;
+  string service = 2;
+}
+message AddHostRes{
+}
+
+message LoadReq{
+    string cfg = 1;
+}
+message LoadRes{
+}
