@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"start/naming/pb/naming"
+	"start/pkg/e"
 
 	"start/bff/internal/svc"
 	"start/bff/internal/types"
@@ -25,13 +26,24 @@ func NewLoadByjsonLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoadBy
 }
 
 func (l *LoadByjsonLogic) LoadByjson(req *types.LoadByjsonReq) (resp *types.LoadByjsonRes, err error) {
-	load, err := l.svcCtx.CaddyClient.Load(l.ctx, &naming.LoadReq{
+	_, err = l.svcCtx.CaddyClient.Load(l.ctx, &naming.LoadReq{
 		Cfg: req.LoadJson,
 	})
-	if err != nil {
+	switch err.(type) {
+	case error:
 		return nil, err
+	case e.Err:
+		e := err.(e.Err)
+		return &types.LoadByjsonRes{
+			Res: types.Res{
+				Code: 200,
+				Msg:  e.Code().String(),
+			},
+		}, err
 	}
 	return &types.LoadByjsonRes{
-		Res: types.Res{},
+		Res: types.Res{
+			Code: 200,
+		},
 	}, nil
 }

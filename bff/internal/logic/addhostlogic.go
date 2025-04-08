@@ -4,10 +4,10 @@ import (
 	"context"
 	"start/naming/pb/naming"
 
+	"github.com/zeromicro/go-zero/core/logx"
 	"start/bff/internal/svc"
 	"start/bff/internal/types"
-
-	"github.com/zeromicro/go-zero/core/logx"
+	"start/pkg/e"
 )
 
 type AddHostLogic struct {
@@ -25,17 +25,24 @@ func NewAddHostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddHostLo
 }
 
 func (l *AddHostLogic) AddHost(req *types.AddHostReq) (resp *types.AddHostRes, err error) {
-	res, err := l.svcCtx.CaddyClient.AddHost(l.ctx, &naming.AddHostReq{
+	_, err = l.svcCtx.CaddyClient.AddHost(l.ctx, &naming.AddHostReq{
 		Host: req.Host,
 	})
-	if err != nil {
+	switch err.(type) {
+	case error:
 		return nil, err
+	case e.Err:
+		e := err.(e.Err)
+		return &types.AddHostRes{
+			Res: types.Res{
+				Code: 200,
+				Msg:  e.Code().String(),
+			},
+		}, err
 	}
 	return &types.AddHostRes{
 		Res: types.Res{
 			Code: 200,
-			Data: "",
-			Msg:  "",
 		},
 	}, nil
 }

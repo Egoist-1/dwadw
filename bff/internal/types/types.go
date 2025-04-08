@@ -21,7 +21,7 @@ type LoadByjsonRes struct {
 
 type Res struct {
 	Code int
-	Data string
+	Data any
 	Msg  string
 }
 

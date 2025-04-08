@@ -26,7 +26,6 @@ message GetAllInfoReqRes{
 
 message AddHostReq{
   repeated string host = 1;
-  string service = 2;
 }
 message AddHostRes{
 }

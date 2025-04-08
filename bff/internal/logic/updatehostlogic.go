@@ -2,6 +2,8 @@ package logic
 
 import (
 	"context"
+	"start/naming/pb/naming"
+	"start/pkg/e"
 
 	"start/bff/internal/svc"
 	"start/bff/internal/types"
@@ -24,7 +26,25 @@ func NewUpdateHostLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Update
 }
 
 func (l *UpdateHostLogic) UpdateHost(req *types.UpdateHostReq) (resp *types.UpdateHostRes, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	_, err = l.svcCtx.CaddyClient.UpdateHost(l.ctx, &naming.UpdateHostReq{
+		OrgHost: req.OrgHost,
+		ExpHost: req.ExpHost,
+	})
+	switch err.(type) {
+	case error:
+		return nil, err
+	case e.Err:
+		e := err.(e.Err)
+		return &types.UpdateHostRes{
+			Res: types.Res{
+				Code: 200,
+				Msg:  e.Code().String(),
+			},
+		}, err
+	}
+	return &types.UpdateHostRes{
+		Res: types.Res{
+			Code: 200,
+		},
+	}, nil
 }
