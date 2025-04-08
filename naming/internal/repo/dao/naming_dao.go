@@ -2,6 +2,8 @@ package dao
 
 import (
 	"context"
+	"errors"
+	"github.com/go-sql-driver/mysql"
 	"gorm.io/gorm"
 	"time"
 )
@@ -45,7 +47,18 @@ func (dao *namingGorm) StoreHost(ctx context.Context, hosts []string) error {
 			Utime:  now,
 		}).Error
 		if err != nil {
-			break
+			return dao.duplicate(err)
+		}
+	}
+	return err
+}
+func (dao *namingGorm) duplicate(err error) error {
+	if mysqlErr, ok := err.(*mysql.MySQLError); ok {
+		const uniqueConflictsErrNo uint16 = 1062
+		// MySQL错误码1062表示唯一冲突
+		if mysqlErr.Number == uniqueConflictsErrNo {
+			// 返回自定义的唯一冲突错误
+			return errors.New("域名已经存在")
 		}
 	}
 	return err
@@ -53,7 +66,7 @@ func (dao *namingGorm) StoreHost(ctx context.Context, hosts []string) error {
 
 type Naming struct {
 	Id     int64  `gorm:"primaryKey;autoIncrement;"`
-	Naming string `gorm:"varchar(255)"`
+	Naming string `gorm:"varchar(255);unique"`
 	//域名在caddy的下标
 	Ctime int64
 	Utime int64

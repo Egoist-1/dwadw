@@ -2,11 +2,9 @@ package logic
 
 import (
 	"context"
-	"start/naming/pb/naming"
-	"start/pkg/e"
-
 	"start/bff/internal/svc"
 	"start/bff/internal/types"
+	"start/naming/pb/naming"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -29,18 +27,6 @@ func (l *LoadByjsonLogic) LoadByjson(req *types.LoadByjsonReq) (resp *types.Load
 	_, err = l.svcCtx.CaddyClient.Load(l.ctx, &naming.LoadReq{
 		Cfg: req.LoadJson,
 	})
-	switch err.(type) {
-	case error:
-		return nil, err
-	case e.Err:
-		e := err.(e.Err)
-		return &types.LoadByjsonRes{
-			Res: types.Res{
-				Code: 200,
-				Msg:  e.Code().String(),
-			},
-		}, err
-	}
 	return &types.LoadByjsonRes{
 		Res: types.Res{
 			Code: 200,
