@@ -2,8 +2,8 @@ package logic
 
 import (
 	"context"
-	"naming/internal/svc"
-	"naming/pb/naming"
+	"naming/naming/internal/svc"
+	"naming/naming/pb/naming"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

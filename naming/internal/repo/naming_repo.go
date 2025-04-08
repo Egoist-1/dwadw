@@ -2,7 +2,7 @@ package repo
 
 import (
 	"context"
-	"naming/internal/repo/dao"
+	"naming/naming/internal/repo/dao"
 )
 
 func NewNamingRepo(dao dao.NamingDAO) NamingRepo {

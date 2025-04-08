@@ -6,11 +6,11 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"gorm.io/gorm"
-	"naming/internal/config"
-	"naming/internal/integration/startup"
-	"naming/internal/server"
-	"naming/internal/svc"
-	"naming/pb/naming"
+	"naming/naming/internal/config"
+	"naming/naming/internal/integration/startup"
+	"naming/naming/internal/server"
+	"naming/naming/internal/svc"
+	"naming/naming/pb/naming"
 	"testing"
 )
 

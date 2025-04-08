@@ -6,3 +6,4 @@ Etcd:
   Key: naming.rpc
 DSN: "root:root@tcp(localhost:3306)/naming"
 CaddyHost: "http://localhost:2019"
+

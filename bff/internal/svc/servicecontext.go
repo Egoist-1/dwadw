@@ -1,9 +1,9 @@
 package svc
 
 import (
-	"start/bff/internal/config"
-	"start/bff/internal/rpc_client"
-	"start/naming/pb/naming"
+	"naming/bff/internal/config"
+	"naming/bff/internal/rpc_client"
+	"naming/naming/pb/naming"
 )
 
 type ServiceContext struct {
@@ -14,6 +14,6 @@ type ServiceContext struct {
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config:      c,
-		CaddyClient: rpc_client.InitCaddyClient(c.Caddy),
+		CaddyClient: rpc_client.InitCaddyClient(),
 	}
 }

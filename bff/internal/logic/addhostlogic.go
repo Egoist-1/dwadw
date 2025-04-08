@@ -2,11 +2,11 @@ package logic
 
 import (
 	"context"
-	"start/naming/pb/naming"
+	"naming/naming/pb/naming"
 
 	"github.com/zeromicro/go-zero/core/logx"
-	"start/bff/internal/svc"
-	"start/bff/internal/types"
+	"naming/bff/internal/svc"
+	"naming/bff/internal/types"
 )
 
 type AddHostLogic struct {

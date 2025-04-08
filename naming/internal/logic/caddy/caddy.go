@@ -57,7 +57,7 @@ func (c *caddy) UpdateHost(ctx context.Context, index int64, host string) error 
 func (c *caddy) GetHostInfo(ctx context.Context, l logx.Logger) ([]string, error) {
 	// 基本 GET 请求
 	str := make([]string, 0, 10)
-	resp, err := http.Get(c.host + "/config/apps/http/servers/myserver/routes/0/match/0/host")
+	resp, err := http.Get(c.hostUrl())
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func (c *caddy) GetHostInfo(ctx context.Context, l logx.Logger) ([]string, error
 func (c *caddy) Load(ctx context.Context, l logx.Logger, cfg string) error {
 	// 创建请求
 
-	req, err := http.NewRequest("POST", c.host+"/load", bytes.NewBuffer([]byte(cfg)))
+	req, err := http.NewRequest("POST", c.hostUrl()+"/load", bytes.NewBuffer([]byte(cfg)))
 	if err != nil {
 		l.Error("caddy 发送http请求失败", err)
 		return err
@@ -134,7 +134,7 @@ func (c *caddy) GetAllInfo(ctx context.Context, l logx.Logger) (string, error) {
 	return string(body), err
 }
 func (c *caddy) hostUrl() string {
-	return c.host + "/config/apps/http/servers/myserver/routes/0/match/0/host"
+	return "http://" + c.host + "/config/apps/http/servers/myserver/routes/0/match/0/host"
 }
 func (c *caddy) hostByIndex(index int64) string {
 	i := strconv.FormatInt(index, 10)

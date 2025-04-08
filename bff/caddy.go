@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
-	"start/bff/internal/config"
-	"start/bff/internal/handler"
-	"start/bff/internal/svc"
+	"naming/bff/internal/config"
+	"naming/bff/internal/handler"
+	"naming/bff/internal/svc"
 )
 
 var configFile = flag.String("f", "etc/caddy.yaml", "the config file")
@@ -17,7 +17,6 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
-
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()
 

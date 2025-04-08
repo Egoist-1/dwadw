@@ -7,9 +7,9 @@ package server
 import (
 	"context"
 
-	"naming/internal/logic"
-	"naming/internal/svc"
-	"naming/pb/naming"
+	"naming/naming/internal/logic"
+	"naming/naming/internal/svc"
+	"naming/naming/pb/naming"
 )
 
 type NamingServer struct {

@@ -1,11 +1,11 @@
 package svc
 
 import (
-	"naming/internal/config"
-	"naming/internal/ioc"
-	"naming/internal/logic/caddy"
-	"naming/internal/repo"
-	"naming/internal/repo/dao"
+	"naming/naming/internal/config"
+	"naming/naming/internal/ioc"
+	"naming/naming/internal/logic/caddy"
+	"naming/naming/internal/repo"
+	"naming/naming/internal/repo/dao"
 )
 
 type ServiceContext struct {

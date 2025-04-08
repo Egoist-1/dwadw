@@ -1,5 +1,4 @@
 Name: Caddy
 Host: 0.0.0.0
-Port: 8888
-Target:
-  Caddy: 127.0.0.1:8080
+Port: 9999
+Caddy: "0.0.0.0:8080"

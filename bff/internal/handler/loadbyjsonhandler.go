@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"start/bff/internal/logic"
-	"start/bff/internal/svc"
-	"start/bff/internal/types"
+	"naming/bff/internal/logic"
+	"naming/bff/internal/svc"
+	"naming/bff/internal/types"
 )
 
 func LoadByjsonHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

@@ -3,7 +3,7 @@ package startup
 import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"naming/internal/repo/dao"
+	"naming/naming/internal/repo/dao"
 )
 
 func InitGorm(dsn string) *gorm.DB {

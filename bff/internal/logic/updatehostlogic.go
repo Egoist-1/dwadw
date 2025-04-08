@@ -2,9 +2,9 @@ package logic
 
 import (
 	"context"
-	"start/bff/internal/svc"
-	"start/bff/internal/types"
-	"start/naming/pb/naming"
+	"naming/bff/internal/svc"
+	"naming/bff/internal/types"
+	"naming/naming/pb/naming"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

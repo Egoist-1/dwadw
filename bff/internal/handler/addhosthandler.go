@@ -5,9 +5,9 @@ import (
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 	xhttp "github.com/zeromicro/x/http"
-	"start/bff/internal/logic"
-	"start/bff/internal/svc"
-	"start/bff/internal/types"
+	"naming/bff/internal/logic"
+	"naming/bff/internal/svc"
+	"naming/bff/internal/types"
 )
 
 func AddHostHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

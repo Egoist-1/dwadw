@@ -4,10 +4,10 @@ import (
 	"flag"
 	"fmt"
 
-	"naming/internal/config"
-	"naming/internal/server"
-	"naming/internal/svc"
-	"naming/pb/naming"
+	"naming/naming/internal/config"
+	"naming/naming/internal/server"
+	"naming/naming/internal/svc"
+	"naming/naming/pb/naming"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

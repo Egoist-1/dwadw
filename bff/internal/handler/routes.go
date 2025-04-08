@@ -6,7 +6,7 @@ package handler
 import (
 	"net/http"
 
-	"start/bff/internal/svc"
+	"naming/bff/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
