@@ -27,9 +27,5 @@ func (l *AddHostLogic) AddHost(req *types.AddHostReq) (resp *types.AddHostRes, e
 	_, err = l.svcCtx.CaddyClient.AddHost(l.ctx, &naming.AddHostReq{
 		Host: req.Host,
 	})
-	return &types.AddHostRes{
-		Res: types.Res{
-			Code: 200,
-		},
-	}, err
+	return &types.AddHostRes{}, err
 }

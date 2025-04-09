@@ -31,6 +31,8 @@ func (l *LoadLogic) Load(in *naming.LoadReq) (*naming.LoadRes, error) {
 	//获取caddy的host /apps/..../host
 	hosts, err := l.svcCtx.Caddy.GetHostInfo(l.ctx, l.Logger)
 	//拿到host 存入 数据库
-	err = l.svcCtx.Repo.StoreHost(l.ctx, hosts)
+	for _, v := range hosts {
+		err = l.svcCtx.Repo.StoreHost(l.ctx, v)
+	}
 	return &naming.LoadRes{}, err
 }

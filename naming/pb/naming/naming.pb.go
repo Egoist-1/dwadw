@@ -191,8 +191,7 @@ func (x *GetAllInfoReqRes) GetInfo() string {
 
 type AddHostReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Host          []string               `protobuf:"bytes,1,rep,name=host,proto3" json:"host,omitempty"`
-	Service       string                 `protobuf:"bytes,2,opt,name=service,proto3" json:"service,omitempty"`
+	Host          string                 `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -227,16 +226,9 @@ func (*AddHostReq) Descriptor() ([]byte, []int) {
 	return file_naming_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *AddHostReq) GetHost() []string {
+func (x *AddHostReq) GetHost() string {
 	if x != nil {
 		return x.Host
-	}
-	return nil
-}
-
-func (x *AddHostReq) GetService() string {
-	if x != nil {
-		return x.Service
 	}
 	return ""
 }
@@ -368,11 +360,10 @@ const file_naming_proto_rawDesc = "" +
 	"\rUpdateHostRes\"\x0f\n" +
 	"\rGetAllInfoReq\"&\n" +
 	"\x10GetAllInfoReqRes\x12\x12\n" +
-	"\x04info\x18\x01 \x01(\tR\x04info\":\n" +
+	"\x04info\x18\x01 \x01(\tR\x04info\" \n" +
 	"\n" +
 	"AddHostReq\x12\x12\n" +
-	"\x04host\x18\x01 \x03(\tR\x04host\x12\x18\n" +
-	"\aservice\x18\x02 \x01(\tR\aservice\"\f\n" +
+	"\x04host\x18\x01 \x01(\tR\x04host\"\f\n" +
 	"\n" +
 	"AddHostRes\"\x1b\n" +
 	"\aLoadReq\x12\x10\n" +

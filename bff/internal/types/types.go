@@ -4,25 +4,17 @@
 package types
 
 type AddHostReq struct {
-	Host []string `json:"host"`
+	Host string `json:"host"`
 }
 
 type AddHostRes struct {
-	Res
 }
 
 type LoadByjsonReq struct {
-	LoadJson string `json:"loadJson"` // 或 `json:"loadJson,omitempty"`（如果字段可选）
+	LoadJson string `json:"apps"`
 }
 
 type LoadByjsonRes struct {
-	Res
-}
-
-type Res struct {
-	Code int
-	Data any
-	Msg  string
 }
 
 type UpdateHostReq struct {
@@ -31,5 +23,4 @@ type UpdateHostReq struct {
 }
 
 type UpdateHostRes struct {
-	Res
 }

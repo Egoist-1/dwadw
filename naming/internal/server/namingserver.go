@@ -37,7 +37,8 @@ func (s *NamingServer) GetAllInfo(ctx context.Context, in *naming.GetAllInfoReq)
 	l := logic.NewGetAllInfoLogic(ctx, s.svcCtx)
 	return l.GetAllInfo(in)
 }
-func (s *NamingServer) UpdateHost(ctx context.Context,in *naming.UpdateHostReq) (*naming.UpdateHostRes, error) {
-	log := logic.NewUpdateHostLogic(ctx,s.svcCtx)
-	return log.UpdateHost(in)
+
+func (s *NamingServer) UpdateHost(ctx context.Context, in *naming.UpdateHostReq) (*naming.UpdateHostRes, error) {
+	l := logic.NewUpdateHostLogic(ctx, s.svcCtx)
+	return l.UpdateHost(in)
 }

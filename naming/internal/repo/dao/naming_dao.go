@@ -13,7 +13,7 @@ func NewNamingGORM(db *gorm.DB) NamingDAO {
 }
 
 type NamingDAO interface {
-	StoreHost(ctx context.Context, hosts []string) error
+	StoreHost(ctx context.Context, hosts string) error
 	FindByHost(ctx context.Context, host string) (int64, error)
 	UpdateHost(ctx context.Context, org string, exp string) error
 }
@@ -22,7 +22,7 @@ type namingGorm struct {
 }
 
 func (dao *namingGorm) UpdateHost(ctx context.Context, org string, exp string) error {
-	err := dao.db.WithContext(ctx).Model(&Naming{}).
+	err := dao.db.Model(&Naming{}).
 		Select("naming").
 		Where("naming = ?", org).
 		Updates(map[string]interface{}{
@@ -33,22 +33,20 @@ func (dao *namingGorm) UpdateHost(ctx context.Context, org string, exp string) e
 
 func (dao *namingGorm) FindByHost(ctx context.Context, host string) (int64, error) {
 	var naming Naming
-	err := dao.db.WithContext(ctx).Where("naming = ?", host).First(&naming).Error
+	err := dao.db.Where("naming = ?", host).First(&naming).Error
 	return naming.Id, err
 }
 
-func (dao *namingGorm) StoreHost(ctx context.Context, hosts []string) error {
+func (dao *namingGorm) StoreHost(ctx context.Context, hosts string) error {
 	now := time.Now().UnixMilli()
 	var err error
-	for _, v := range hosts {
-		err = dao.db.WithContext(ctx).Create(&Naming{
-			Naming: v,
-			Ctime:  now,
-			Utime:  now,
-		}).Error
-		if err != nil {
-			return dao.duplicate(err)
-		}
+	err = dao.db.Create(&Naming{
+		Naming: hosts,
+		Ctime:  now,
+		Utime:  now,
+	}).Error
+	if err != nil {
+		return dao.duplicate(err)
 	}
 	return err
 }

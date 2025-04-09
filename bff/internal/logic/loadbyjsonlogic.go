@@ -27,9 +27,5 @@ func (l *LoadByjsonLogic) LoadByjson(req *types.LoadByjsonReq) (resp *types.Load
 	_, err = l.svcCtx.CaddyClient.Load(l.ctx, &naming.LoadReq{
 		Cfg: req.LoadJson,
 	})
-	return &types.LoadByjsonRes{
-		Res: types.Res{
-			Code: 200,
-		},
-	}, nil
+	return &types.LoadByjsonRes{}, nil
 }

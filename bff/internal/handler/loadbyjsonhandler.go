@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"io/ioutil"
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
@@ -12,10 +13,16 @@ import (
 func LoadByjsonHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.LoadByjsonReq
-		if err := httpx.Parse(r, &req); err != nil {
-			httpx.ErrorCtx(r.Context(), w, err)
+		bs, e := ioutil.ReadAll(r.Body)
+		if e != nil {
+			httpx.ErrorCtx(r.Context(), w, e)
 			return
 		}
+		req.LoadJson = string(bs)
+		//if err := httpx.Parse(r, &req); err != nil {
+		//	httpx.ErrorCtx(r.Context(), w, err)
+		//	return
+		//}
 
 		l := logic.NewLoadByjsonLogic(r.Context(), svcCtx)
 		resp, err := l.LoadByjson(&req)

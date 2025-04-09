@@ -31,11 +31,15 @@ type caddy struct {
 
 func (c *caddy) UpdateHost(ctx context.Context, index int64, host string) error {
 	// 创建请求
-	j, err := json.Marshal(host)
-	if err != nil {
-		return err
+	//j, err := json.Marshal(host)
+	//if err != nil {
+	//	return err
+	//}
+	js, e := json.Marshal(host)
+	if e != nil {
+		return e
 	}
-	req, err := http.NewRequest("PATCH", c.hostByIndex(index), bytes.NewBuffer(j))
+	req, err := http.NewRequest("PATCH", c.hostByIndex(index), bytes.NewBuffer(js))
 	if err != nil {
 		return err
 	}
@@ -75,8 +79,11 @@ func (c *caddy) GetHostInfo(ctx context.Context, l logx.Logger) ([]string, error
 
 func (c *caddy) Load(ctx context.Context, l logx.Logger, cfg string) error {
 	// 创建请求
-
-	req, err := http.NewRequest("POST", c.hostUrl()+"/load", bytes.NewBuffer([]byte(cfg)))
+	//js, err := json.Marshal(cfg)
+	//if err != nil {
+	//	return err
+	//}
+	req, err := http.NewRequest("POST", "http://"+c.host+"/load", bytes.NewBuffer([]byte(cfg)))
 	if err != nil {
 		l.Error("caddy 发送http请求失败", err)
 		return err

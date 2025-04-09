@@ -28,9 +28,5 @@ func (l *UpdateHostLogic) UpdateHost(req *types.UpdateHostReq) (resp *types.Upda
 		OrgHost: req.OrgHost,
 		ExpHost: req.ExpHost,
 	})
-	return &types.UpdateHostRes{
-		Res: types.Res{
-			Code: 200,
-		},
-	}, err
+	return &types.UpdateHostRes{}, err
 }

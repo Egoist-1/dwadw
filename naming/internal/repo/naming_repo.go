@@ -10,7 +10,7 @@ func NewNamingRepo(dao dao.NamingDAO) NamingRepo {
 }
 
 type NamingRepo interface {
-	StoreHost(ctx context.Context, hosts []string) error
+	StoreHost(ctx context.Context, hosts string) error
 	FindByHost(ctx context.Context, host string) (int64, error)
 	UpdateHost(ctx context.Context, org string, exp string) error
 }
@@ -26,6 +26,6 @@ func (repo *namingRepo) FindByHost(ctx context.Context, host string) (int64, err
 	return repo.dao.FindByHost(ctx, host)
 }
 
-func (repo *namingRepo) StoreHost(ctx context.Context, hosts []string) error {
+func (repo *namingRepo) StoreHost(ctx context.Context, hosts string) error {
 	return repo.dao.StoreHost(ctx, hosts)
 }

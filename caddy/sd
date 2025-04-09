@@ -1,0 +1,40 @@
+数据库方面
+
+存储引擎选择 InnoDB
+字符集选择 utf8mb4
+排序方式选择 utf8mb4_bin
+数据表命名 小写加下划线，不要没事在后面加s
+字段 小写加下划线
+不同表同一语义的字段，使用相同的字段名
+创建时间、修改时间 字段名固定为created_at、updated_at，类型为datetime，默认值为CURRENT_TIMESTAMP，使用数据库自己的默认值策略
+id字段类型为int64
+数据库每个字段都要有注释，数据表本身也要有注释
+索引命名 idx_(固定前缀)+字段名+_desc(排序方式)
+
+尽量不要使用外键
+不要用gorm的自动迁移
+
+gozero项目
+使用api-gen生成模版
+非必要 api层不写逻辑，只负责调用rpc
+
+api文件采用分层模式
+目录结构
+api
+└── desc
+    ├── common.api
+    ├── project.api
+    └── table1
+        └── table1.api
+    └── table2
+        └── table2.api
+
+go install github.com/Rankgice/api-gen@v0.0.09
+
+
+
+
+
+
+
+
