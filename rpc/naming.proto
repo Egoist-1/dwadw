@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package naming;
+option go_package = "./naming";
+
+// Common
+message IdReq {
+    int64 Id = 1;   // id
+}
+message StringRes {
+    string Resp = 1;    // 返回信息
+}
+message IdListReq {
+    repeated int64 IdList = 1;  // id列表
+}
+message PageResult {
+    int64 Page = 1;// 页码
+    int64 PageSize  = 2;// 每页数量
+    int64 Total = 3; // 总数
+}
+
+// naming 示例 Copy to the main proto file
+service naming {
+    //查询示例列表
+    rpc GetNamingList(NamingReq) returns (NamingListRes);
+
+    //查询示例详情
+    rpc GetNamingInfo (IdReq)returns (NamingInfoRes);
+
+    //新增示例
+    rpc AddNaming (NamingInfoRes) returns (StringRes);
+
+    //删除示例
+    rpc DelNaming (IdReq) returns (StringRes);
+
+    //批量删除示例
+    rpc BatchDelNaming (IdListReq) returns (StringRes);
+
+    //修改示例
+    rpc UpdateNaming (NamingInfoRes) returns (StringRes);
+}
+
+message NamingReq {
+	int64	Id	 = 1;// 自增主键ID
+	string	Naming	 = 2;// caddy的host
+	string	CreatedAt	 = 3;// 创建时间
+	string	UpdatedAt	 = 4;// 更新时间
+	int64 Page = 5; // 页码
+	int64 PageSize = 6; // 每页数量
+}
+
+message NamingInfoRes {
+	int64	Id	 = 1;// 自增主键ID
+	string	Naming	 = 2;// caddy的host
+	string	CreatedAt	 = 3;// 创建时间
+	string	UpdatedAt	 = 4;// 更新时间
+}
+
+message NamingListRes {
+    repeated NamingInfoRes List = 1;  // 示例列表
+    PageResult PageResult = 2;// 分页结果
+}

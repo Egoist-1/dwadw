@@ -30,11 +30,3 @@ api
         └── table2.api
 
 go install github.com/Rankgice/api-gen@v0.0.09
-
-
-
-
-
-
-
-

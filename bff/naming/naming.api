@@ -1,0 +1,52 @@
+syntax = "v1"
+
+import "../common.api"
+@server (
+    prefix: -y
+    group: naming
+)
+service naming {
+    @doc "查询示例列表"
+    @handler GetNamingList
+    get /naming/list (NamingReq) returns (NamingListRes)
+
+    @doc "查询示例详情"
+    @handler GetNamingInfo
+    get /naming/info/:id (IdReq) returns (NamingInfoRes)
+
+    @doc "新增示例"
+    @handler AddNaming
+    post /naming/add (NamingInfoRes) returns (string)
+
+    @doc "删除示例"
+    @handler DelNaming
+    delete /naming/delete/:id (IdReq) returns (string)
+
+    @doc "批量删除示例"
+    @handler BatchDelNaming
+    delete /naming/batchDelete (IdListReq) returns (string)
+
+    @doc "修改示例"
+    @handler UpdateNaming
+    put /naming/update (NamingInfoRes) returns (string)
+}
+type NamingReq {
+	Id	int64	`json:"id,optional" form:"id,optional"` // 自增主键ID
+	Naming	string	`json:"naming,optional" form:"naming,optional"` // caddy的host
+	CreatedAt	string	`json:"created_at,optional" form:"created_at,optional"` // 创建时间
+	UpdatedAt	string	`json:"updated_at,optional" form:"updated_at,optional"` // 更新时间
+    Page         int64  `json:"page,optional" form:"page,optional"` // 页码
+    PageSize     int64  `json:"page_size,optional" form:"page_size,optional"` // 每页数量
+}
+
+type NamingInfoRes {
+	Id	int64	`json:"id,optional" form:"id,optional"` // 自增主键ID
+	Naming	string	`json:"naming,optional" form:"naming,optional"` // caddy的host
+	CreatedAt	string	`json:"created_at,optional" form:"created_at,optional"` // 创建时间
+	UpdatedAt	string	`json:"updated_at,optional" form:"updated_at,optional"` // 更新时间
+}
+
+type NamingListRes {
+    List       []NamingInfoRes `json:"list,optional" form:"list,optional"` // 示例列表
+    PageResult PageResult `json:"page_result,optional" form:"page_result,optional"` // 分页结果
+}

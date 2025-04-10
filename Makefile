@@ -1,16 +1,17 @@
+.PHONY:  gen-api
 # 数据库连接 URL
-DB_URL := rootdev:LGCMtHeYxAmpJnsk@tcp(182.44.10.210:3306)/user
-TABLE_NAME := operate_log
-BIG_TABLE_NAME := operateLog
+DB_URL := root:root@tcp(localhost:3306)/naming
+TABLE_NAME := naming
+BIG_TABLE_NAME := naming
 # goctl 模版
 TEMPLATE_PATH := C:/Users/PC/GolandProjects/landingpage/goctltempalate
 # api 路由前缀
-API_ROUTE_PREFIX := user/v1/admin
+API_ROUTE_PREFIX :=
 # api,proto文件所在目录
-API_DIR_PATH := ./api/desc
+API_DIR_PATH := ./api
 RPC_DIR_PATH := ./rpc
 # 项目名
-PROJECT_NAME := user
+PROJECT_NAME := naming
 
 # api,proto,swagger文件位置
 API_PATH := $(API_DIR_PATH)/$(PROJECT_NAME).api
@@ -18,7 +19,7 @@ RPC_PATH := $(RPC_DIR_PATH)/$(PROJECT_NAME).proto
 SWAGGER_PATH := $(API_DIR_PATH)/$(PROJECT_NAME).json
 
 gen-api:	# 根据数据库表生成api文件
-	api-gen api --dir $(API_DIR_PATH) --url "$(DB_URL)" --prefix $(API_ROUTE_PREFIX) --table $(TABLE_NAME) --service $(PROJECT_NAME) -y
+	api-gen api --table $(TABLE_NAME) --service $(PROJECT_NAME) --dir $(API_DIR_PATH) --url "$(DB_URL)" --prefix $(API_ROUTE_PREFIX)   -y
 gen-rpc:	# 根据数据库表生成proto文件
 	api-gen rpc --dir $(RPC_DIR_PATH) --url "$(DB_URL)" --table $(TABLE_NAME)
 goctl-api:	# 根据api文件生成go代码
